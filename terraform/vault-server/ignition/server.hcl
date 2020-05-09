@@ -1,4 +1,4 @@
-api_addr     = "${vault_address}"
+api_addr     = "https://${vault_address}"
 cluster_addr = "http://127.0.0.1:8201"
 
 listener "tcp" {
@@ -15,4 +15,4 @@ storage "dynamodb" {
 seal "awskms" {
   kms_key_id = "${kms_id}"
 }
-cluster_name = "${name}"
+cluster_name = "${vault_address}"

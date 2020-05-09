@@ -48,3 +48,7 @@ variable read_capacity {
 variable write_capacity {
   default = 15
 }
+
+variable vault_address {}
+variable region {}
+variable instance_type {}

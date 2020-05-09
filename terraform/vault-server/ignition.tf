@@ -14,6 +14,7 @@ locals {
     vault_address  = var.vault_address
     kms_arn        = aws_kms_key.main.arn
     dynamodb_table = aws_dynamodb_table.main.name
+    region         = var.region
   }
 }
 
