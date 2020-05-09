@@ -10,8 +10,8 @@ data "ignition_config" "main" {
 
 locals {
   server = {
-    vault_address = var.vault_address
-    aws_role_name = var.aws_role_name
+    vault_address   = var.vault_address
+    vault_role_name = var.vault_role_name
   }
 }
 

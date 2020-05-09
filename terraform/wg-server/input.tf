@@ -3,7 +3,7 @@ variable vault_address {
   description = "Address of vault server (e.g https://vault.example.com)"
 }
 
-variable aws_role_name {
+variable vault_role_name {
   type = string
 
 }

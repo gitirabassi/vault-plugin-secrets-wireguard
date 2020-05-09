@@ -9,7 +9,7 @@ auto_auth {
     mount_path = "auth/aws"
     config = {
       type = "iam"
-      role = "${role_name}"
+      role = "${vault_role_name}"
     }
   }
 }
