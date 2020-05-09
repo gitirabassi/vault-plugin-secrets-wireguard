@@ -61,6 +61,11 @@ data "aws_ami" "flatcar" {
     name   = "virtualization-type"
     values = ["hvm"]
   }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
 }
 
 data "aws_availability_zones" "available" {

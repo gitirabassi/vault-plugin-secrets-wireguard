@@ -8,15 +8,14 @@ resource "aws_eip" "main" {
 }
 
 resource "aws_instance" "main" {
-  ami                         = data.aws_ami.flatcar.id
-  instance_type               = var.instance_type
-  user_data                   = data.ignition_config.main.rendered
-  subnet_id                   = aws_subnet.main.id
-  iam_instance_profile        = aws_iam_instance_profile.main.name
-  vpc_security_group_ids      = [aws_security_group.main.id]
-  key_name                    = var.ssh_key_name
-  ebs_optimized               = true
-  associate_public_ip_address = false
+  ami                    = data.aws_ami.flatcar.id
+  instance_type          = var.instance_type
+  user_data              = data.ignition_config.main.rendered
+  subnet_id              = aws_subnet.main.id
+  iam_instance_profile   = aws_iam_instance_profile.main.name
+  vpc_security_group_ids = [aws_security_group.main.id]
+  key_name               = var.ssh_key_name
+  ebs_optimized          = true
   tags = {
     Name = var.name
   }
