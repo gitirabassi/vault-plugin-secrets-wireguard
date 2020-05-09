@@ -1,4 +1,4 @@
-data "ignition_config" "server" {
+data "ignition_config" "main" {
   systemd = [
     data.ignition_systemd_unit.caddy.rendered,
     data.ignition_systemd_unit.vault.rendered,

@@ -13,6 +13,6 @@ storage "dynamodb" {
   region     = "${region}"
 }
 seal "awskms" {
-  kms_key_id = "${kms_id}"
+  kms_key_id = "${kms_arn}"
 }
 cluster_name = "${vault_address}"
