@@ -19,7 +19,7 @@ data "aws_iam_policy_document" "main" {
   }
 }
 
-resource "aws_iam_role_policy" "vault" {
+resource "aws_iam_role_policy" "storage" {
   name   = "${var.name}-storage"
   role   = aws_iam_role.main.id
   policy = data.aws_iam_policy_document.storage.json
@@ -53,7 +53,7 @@ data "aws_iam_policy_document" "storage" {
   }
 }
 
-resource "aws_iam_role_policy" "vault" {
+resource "aws_iam_role_policy" "kms" {
   name   = "${var.name}-kms"
   role   = aws_iam_role.main.id
   policy = data.aws_iam_policy_document.kms.json
