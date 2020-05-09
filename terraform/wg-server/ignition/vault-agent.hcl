@@ -18,7 +18,7 @@ cache {
   use_auto_auth_token = true
 }
 
-listener "tcp" {
-  address     = "127.0.0.1:8200"
+listener "unix" {
+  address     = "/opt/run/vault.sock"
   tls_disable = true
 }
