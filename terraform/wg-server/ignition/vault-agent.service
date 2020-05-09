@@ -5,7 +5,7 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
-ExecStart=docker run --rm --name=vault-agent -v /opt:/opt --cap-add IPC_LOCK docker.io/library/vault:1.4.1 agent --config=/opt/conf/vault-agent.hcl
+ExecStart=docker run --rm --name=vault-agent -v /opt:/opt --cap-add IPC_LOCK --entrypoint=vault docker.io/library/vault:1.4.1 agent --config=/opt/conf/vault-agent.hcl
 ExecStop=docker stop vault-agent
 Restart=always
 StartLimitInterval=5
