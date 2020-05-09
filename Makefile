@@ -50,3 +50,8 @@ proto:
 	protoc *.proto --go_out=plugins=grpc:.
 
 .PHONY: bin default generate test vet bootstrap fmt fmtcheck
+
+
+release:
+	docker build -t quay.io/gtirabassi/wg-server-agent:latest .
+	docker push quay.io/gtirabassi/wg-server-agent:latest
