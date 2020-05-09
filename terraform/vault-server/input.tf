@@ -42,16 +42,25 @@ data "aws_ami" "flatcar" {
 data "aws_availability_zones" "available" {}
 
 variable read_capacity {
+  type    = number
   default = 15
 }
 
 variable write_capacity {
+  type    = number
   default = 15
 }
 
-variable vault_address {}
-variable region {}
-variable instance_type {}
+variable vault_address {
+  type = string
+}
+variable region {
+  type = string
+}
+variable instance_type {
+  type    = string
+  default = "t3.small"
+}
 
 variable auto_tls {
   default = false

@@ -70,3 +70,8 @@ variable disable_agent {
   type    = bool
   default = false
 }
+
+variable instance_type {
+  type    = string
+  default = "t3.small"
+}
