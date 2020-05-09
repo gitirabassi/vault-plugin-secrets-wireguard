@@ -10,7 +10,7 @@ variable wireguard_cidr {
 
 }
 
-variable server {
+variable servers {
   type = map(object({
     address  = string
     port     = string
