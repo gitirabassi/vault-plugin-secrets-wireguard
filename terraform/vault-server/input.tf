@@ -40,3 +40,11 @@ data "aws_ami" "flatcar" {
 }
 
 data "aws_availability_zones" "available" {}
+
+variable read_capacity {
+  default = 15
+}
+
+variable write_capacity {
+  default = 15
+}

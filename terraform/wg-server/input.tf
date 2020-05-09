@@ -49,7 +49,7 @@ data "aws_ami" "flatcar" {
 
   filter {
     name   = "name"
-    values = ["Flatcar-stable-*"]
+    values = ["Flatcar-edge-*"]
   }
 
   filter {
