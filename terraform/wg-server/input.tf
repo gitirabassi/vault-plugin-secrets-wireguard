@@ -65,3 +65,8 @@ data "aws_ami" "flatcar" {
 
 data "aws_availability_zones" "available" {
 }
+
+variable disable_agent {
+  type    = bool
+  default = false
+}

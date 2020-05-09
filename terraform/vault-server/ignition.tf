@@ -21,7 +21,7 @@ locals {
 data "ignition_file" "caddy" {
   filesystem = "root"
   path       = "/opt/caddy-conf/Caddyfile"
-  mode       = "0664"
+  mode       = 644
   content {
     content = var.auto_tls ? templatefile("${path.module}/ignition/Caddyfile", local.server) : templatefile("${path.module}/ignition/Caddyfile_notls", local.server)
   }
@@ -30,7 +30,7 @@ data "ignition_file" "caddy" {
 data "ignition_file" "vault" {
   filesystem = "root"
   path       = "/opt/vault/server.hcl"
-  mode       = 0755
+  mode       = 644
   content {
     content = templatefile("${path.module}/ignition/server.hcl", local.server)
   }
