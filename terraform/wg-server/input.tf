@@ -23,7 +23,7 @@ variable wireguard_server_port {
   default = 51820
 }
 
-variable wireguard_webook_port {
+variable wireguard_webhook_port {
   type    = number
   default = 51821
 }
