@@ -1,12 +1,12 @@
 [Unit]
-Description=vault-agent
+Description=vault-server
 Wants=network-online.target
 Requires=network-online.target
 After=network-online.target
 
 [Service]
-ExecStart=docker run --rm --name=vault-agent -v /opt:/opt docker.io/library/vault:1.4.1 agent --config=/opt/conf/vault-agent.hcl
-ExecStop=docker stop vault-agent
+ExecStart=docker run --rm --name=vault-server --network=host -v /opt/vault:/opt/vault docker.io/library/vault:1.4.1 server --config=/opt/vault/server.hcl
+ExecStop=docker stop vault-server
 Restart=always
 StartLimitInterval=5
 RestartSec=10

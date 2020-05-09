@@ -4,20 +4,18 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "wireguard-server"
+    Name = var.name
   }
 }
 
 resource "aws_subnet" "main" {
-  availability_zone       = data.aws_availability_zones.available.names[count.index]
+  availability_zone       = data.aws_availability_zones.available.names[0]
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index + var.public_subnet_index)
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, 0)
   map_public_ip_on_launch = true
 
   tags = {
-    Name              = "Public-${var.cluster_name}-${count.index}"
-    ClusterName       = var.cluster_name
-    KubernetesCluster = var.cluster_name
+    Name = var.name
   }
 }
 
@@ -25,33 +23,27 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name              = var.cluster_name
-    Cluster           = var.cluster_name
-    KubernetesCluster = var.cluster_name
+    Name = var.name
   }
 }
 
-
-resource "aws_route_table" "public" {
+resource "aws_route_table" "main" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name              = "public-${var.cluster_name}"
-    ClusterName       = var.cluster_name
-    KubernetesCluster = var.cluster_name
+    Name = var.name
   }
 }
 
 resource "aws_route_table_association" "public" {
-  count          = var.az-count
-  subnet_id      = element(aws_subnet.public.*.id, count.index)
-  route_table_id = aws_route_table.public.id
+  subnet_id      = aws_subnet.main.id
+  route_table_id = aws_route_table.main.id
 }
 
-resource "aws_route" "public-internet" {
-  route_table_id         = aws_route_table.public.id
+resource "aws_route" "internet" {
+  route_table_id         = aws_route_table.main.id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = aws_internet_gateway.main.id
   depends_on = [
-    aws_route_table.public
+    aws_route_table.main
   ]
 }

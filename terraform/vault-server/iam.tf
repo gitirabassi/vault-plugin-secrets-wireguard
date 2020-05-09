@@ -20,9 +20,9 @@ data "aws_iam_policy_document" "main" {
 }
 
 resource "aws_iam_role_policy" "vault" {
-  name   = "${var.name}-vault"
-  role   = aws_iam_role.vault.id
-  policy = data.aws_iam_policy_document.vault.json
+  name   = "${var.name}-storage"
+  role   = aws_iam_role.main.id
+  policy = data.aws_iam_policy_document.storage.json
 }
 
 data "aws_iam_policy_document" "storage" {
@@ -53,6 +53,12 @@ data "aws_iam_policy_document" "storage" {
   }
 }
 
+resource "aws_iam_role_policy" "vault" {
+  name   = "${var.name}-kms"
+  role   = aws_iam_role.main.id
+  policy = data.aws_iam_policy_document.kms.json
+}
+
 data "aws_iam_policy_document" "kms" {
   statement {
     sid = "VaultKMSSeal"
@@ -67,4 +73,24 @@ data "aws_iam_policy_document" "kms" {
   }
 }
 
+resource "aws_iam_role_policy" "aws-auth" {
+  name   = "${var.name}-aws-auth"
+  role   = aws_iam_role.main.id
+  policy = data.aws_iam_policy_document.aws-auth.json
+}
 
+data "aws_iam_policy_document" "aws-auth" {
+  statement {
+    sid = ""
+    actions = [
+      "ec2:DescribeInstances",
+      "iam:GetInstanceProfile",
+      "iam:GetUser",
+      "iam:GetRole",
+    ]
+    resources = [
+      "*",
+    ]
+  }
+
+}

@@ -1,15 +1,17 @@
 [Unit]
-Description=wg-server-agent
+Description=caddyserver
 Wants=network-online.target
 Requires=network-online.target
 After=network-online.target vault-agent.service
 
 [Service]
-ExecStart=docker run --rm --name=wg-server-agent -v /opt:/opt --network=host docker.io/gitirabassi/wg-server-agent:latest \
-        --agent-socket=/opt/run/vault.sock \
-        --server-name=default \
-        --vault-wireguard-backend-mount-path=wireguard
-ExecStop=docker stop wg-server-agent
+ExecStart=docker run --rm --name=caddyserver -v /opt/caddy-data:/opt/caddy-data -v /opt/caddy-conf:/opt/caddy-conf --env CADDYPATH=/opt/caddy-data/.caddy --network=host abiosoft/caddy:1.0.3 \
+        --conf=/opt/caddy-conf/Caddyfile \
+        --log=stdout \
+        -agree \
+        -email=me+acme@giuani.it
+
+ExecStop=docker stop caddyserver
 Restart=always
 StartLimitInterval=5
 RestartSec=10

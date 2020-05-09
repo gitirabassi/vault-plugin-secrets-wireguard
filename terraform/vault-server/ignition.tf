@@ -1,35 +1,46 @@
 data "ignition_config" "server" {
   systemd = [
-    data.ignition_systemd_unit.wg-server-agent.rendered,
+    data.ignition_systemd_unit.caddy.rendered,
     data.ignition_systemd_unit.vault.rendered,
   ]
   files = [
-    data.ignition_file.vault-agent.rendered,
+    data.ignition_file.vault.rendered,
+    data.ignition_file.caddy.rendered,
   ]
 }
 
 locals {
   server = {
-    vault_address = var.vault_address
-    aws_role_name = var.aws_role_name
+    vault_address  = var.vault_address
+    kms_arn        = aws_kms_key.main.arn
+    dynamodb_table = aws_dynamodb_table.main.name
   }
 }
 
-data "ignition_file" "vault-agent" {
+data "ignition_file" "caddy" {
   filesystem = "root"
-  path       = "/opt/conf/vault-agent.hcl"
+  path       = "/opt/caddy-conf/Caddyfile"
   mode       = "0664"
   content {
-    content = templatefile("${path.module}/ignition/vault-agent.hcl", local.server)
+    content = templatefile("${path.module}/ignition/Caddyfile", local.server)
+  }
+}
+
+data "ignition_file" "vault" {
+  filesystem = "root"
+  path       = "/opt/vault/server.hcl"
+  mode       = "0664"
+  content {
+    content = templatefile("${path.module}/ignition/server.hcl", local.server)
   }
 }
 
 data "ignition_systemd_unit" "vault" {
-  name    = "vault-agent.service"
-  content = file("${path.module}/ignition/vault-agent.service")
+  name    = "vault.service"
+  content = file("${path.module}/ignition/vault.service")
 }
 
-data "ignition_systemd_unit" "wg-server-agent" {
-  name    = "wg-server-agent.service"
-  content = file("${path.module}/ignition/wg-server-agent.service")
+data "ignition_systemd_unit" "caddy" {
+  name    = "caddy.service"
+  content = file("${path.module}/ignition/caddy.service")
 }
