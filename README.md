@@ -27,3 +27,11 @@
 vault policy write wireguard_client_develper contrib/client.hcl
 ```
 
+## Client User Experience
+
+```shell
+export VAULT_ADDR=https://vault.example.com
+vault status
+vault login -method=oidc
+vault read -field=conf wireguard/crets/default |clipcopy
+```

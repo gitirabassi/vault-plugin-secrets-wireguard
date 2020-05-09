@@ -19,6 +19,6 @@ cache {
 }
 
 listener "unix" {
-  address     = "/opt/run/vault.sock"
+  address     = "/opt/vault.sock"
   tls_disable = true
 }
