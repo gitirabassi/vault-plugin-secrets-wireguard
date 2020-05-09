@@ -5,8 +5,7 @@ Requires=network-online.target
 After=network-online.target vault-agent.service
 
 [Service]
-Environment=VAULT_ADDR=unix:///opt/conf/vault.sock
-ExecStart=docker run --rm --name=wg-server-agent -v /opt:/opt --network=host quay.io/gtirabassi/wg-server-agent:latest -creds-path=wireguard/server-creds/wireguard-server
+ExecStart=docker run --rm --name=wg-server-agent -v /opt:/opt --network=host --env VAULT_ADDR=unix:///opt/conf/vault.sock --cap-add=NET_ADMIN --cap-add=NET_RAW quay.io/gtirabassi/wg-server-agent:latest -creds-path=wireguard/server-creds/wireguard-server
 ExecStop=docker stop wg-server-agent
 Restart=always
 StartLimitInterval=5

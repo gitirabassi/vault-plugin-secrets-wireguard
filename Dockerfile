@@ -17,7 +17,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -a -o wg-serve
 
 # Use distroless as minimal base image to package the wg-server-agent binary
 # Refer to https://github.com/GoogleContainerTools/distroless for more details
-FROM gcr.io/distroless/static:nonroot
+FROM alpine:latest
 WORKDIR /
 COPY --from=builder /workspace/wg-server-agent .
 

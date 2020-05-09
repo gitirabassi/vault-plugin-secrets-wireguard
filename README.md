@@ -129,3 +129,14 @@ module "vault-configuration" {
   }
 }
 ```
+
+
+## Webhook
+
+The webook is a trick to not make the wireguard poll every X secods but to reload it's configuration only when a user gets added or deleted
+
+To simulate the hook that Vault will send to the `wg-server-agent` curl can be used
+
+```shell
+curl -XPOST -H 'Content-Type: application/json' -d '{"token":"example-super-secret-token"}' http://dev.aws.example.com:51821/webhook
+```
