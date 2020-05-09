@@ -14,7 +14,7 @@ resource "aws_security_group_rule" "ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = "0.0.0.0/0"
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.main.id
 }
 
@@ -23,7 +23,7 @@ resource "aws_security_group_rule" "wireguard" {
   from_port         = var.wireguard_server_port
   to_port           = var.wireguard_server_port
   protocol          = "udp"
-  cidr_blocks       = "0.0.0.0/0"
+  cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.main.id
 }
 
@@ -32,7 +32,7 @@ resource "aws_security_group_rule" "webhook" {
   from_port         = var.wireguard_webhook_port
   to_port           = var.wireguard_webhook_port
   protocol          = "tcp"
-  cidr_blocks       = var.webhook_source_cidr
+  cidr_blocks       = [var.webhook_source_cidr]
   security_group_id = aws_security_group.main.id
 }
 
@@ -42,5 +42,5 @@ resource "aws_security_group_rule" "egress" {
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.vpc_endpoint.id
+  security_group_id = aws_security_group.main.id
 }
