@@ -117,7 +117,7 @@ provider "vault" {
 module "vault-configuration" {
   source             = "github.com/gitirabassi/vault-plugin-secrets-wireguard//terraform/vault-config"
   backend_mount_path = "wireguard"
-  wireguard_cidr     = "172.12.0.0/16"
+  wireguard_cidr     = "172.16.0.0/16"
   servers = {
     "wireguard-server" = {
       address  = module.wireguard-server.public_ip
