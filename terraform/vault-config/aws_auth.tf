@@ -5,7 +5,7 @@ resource "vault_auth_backend" "aws" {
 resource "vault_aws_auth_backend_role" "main" {
   for_each             = var.servers
   backend              = vault_auth_backend.aws.path
-  role                 = "wireguard-server-${each.key}"
+  role                 = each.key
   auth_type            = "iam"
   bound_vpc_ids        = [each.value.vpc_id]
   bound_iam_role_arns  = [each.value.role_arn]
