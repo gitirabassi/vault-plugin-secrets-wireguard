@@ -5,7 +5,7 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
-ExecStart=docker run --rm --name=vault-server --network=host -v /opt/vault:/opt/vault docker.io/library/vault:1.4.1 server --config=/opt/vault/server.hcl
+ExecStart=docker run --rm --name=vault-server --network=host -v /opt/vault:/opt/vault --cap-add IPC_LOCK docker.io/library/vault:1.4.1 server --config=/opt/vault/server.hcl
 ExecStop=docker stop vault-server
 Restart=always
 StartLimitInterval=5

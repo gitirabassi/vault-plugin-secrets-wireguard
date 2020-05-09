@@ -30,7 +30,7 @@ data "ignition_file" "caddy" {
 data "ignition_file" "vault" {
   filesystem = "root"
   path       = "/opt/vault/server.hcl"
-  mode       = "0664"
+  mode       = "0666"
   content {
     content = templatefile("${path.module}/ignition/server.hcl", local.server)
   }
