@@ -1,0 +1,7 @@
+http://${vault_address} {
+    gzip
+    proxy / 127.0.0.1:8200 {
+        transparent
+    }
+    tls off
+}

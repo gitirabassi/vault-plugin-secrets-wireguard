@@ -52,3 +52,8 @@ variable write_capacity {
 variable vault_address {}
 variable region {}
 variable instance_type {}
+
+variable auto_tls {
+  default = false
+  type    = bool
+}

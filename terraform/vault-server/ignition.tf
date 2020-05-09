@@ -23,7 +23,7 @@ data "ignition_file" "caddy" {
   path       = "/opt/caddy-conf/Caddyfile"
   mode       = "0664"
   content {
-    content = templatefile("${path.module}/ignition/Caddyfile", local.server)
+    content = var.auto_tls ? templatefile("${path.module}/ignition/Caddyfile", local.server) : templatefile("${path.module}/ignition/Caddyfile_notls", local.server)
   }
 }
 
