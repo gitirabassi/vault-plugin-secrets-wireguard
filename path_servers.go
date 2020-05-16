@@ -171,9 +171,14 @@ const serverHelpDesc = `
 servers allow to define which permissions a given token will have
 
 `
-
 const serverListHelpSyn = "asdas"
 const serverListHelpDesc = `
 asdasda
 asdasd
 `
+
+// import "github.com/hashicorp/vault/sdk/database/helper/credsutil"
+// password, err := credsutil.RandomAlphaNumeric(20, true)
+// if err != nil {
+// 	return "", err
+// }
