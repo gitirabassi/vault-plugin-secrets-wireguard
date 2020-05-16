@@ -140,3 +140,7 @@ To simulate the hook that Vault will send to the `wg-server-agent` curl can be u
 ```shell
 curl -XPOST -H 'Content-Type: application/json' -d '{"token":"example-super-secret-token"}' http://dev.aws.example.com:51821/webhook
 ```
+
+
+## Future features
+- rotate server keys (find a ways to use multiple keys to make migration smoother)

@@ -34,9 +34,10 @@ func Backend() *backend {
 		},
 		Paths: framework.PathAppend(
 			b.pathConfig(),
-			// b.pathRoles(),
-			// b.pathCreds(),
-			// b.pathServerCreds(),
+			b.pathRoles(),
+			b.pathServers(),
+			b.pathCreds(),
+			b.pathServerCreds(),
 		),
 		Secrets: []*framework.Secret{
 			b.secretClientConfiguration(),
