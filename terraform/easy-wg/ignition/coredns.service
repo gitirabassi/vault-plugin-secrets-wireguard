@@ -1,0 +1,15 @@
+[Unit]
+Description=coredns
+Wants=network-online.target
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=docker run --rm --name=coredns -v /opt:/opt --network=host coredns/coredns -conf=/opt/Corefile
+ExecStop=docker stop coredns
+Restart=always
+StartLimitInterval=5
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
