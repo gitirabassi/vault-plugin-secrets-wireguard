@@ -96,7 +96,7 @@ type WebhookAuth struct {
 func handleWebook(c echo.Context) error {
 	auth := new(WebhookAuth)
 	if err := c.Bind(auth); err != nil {
-		return c.String(http.StatusBadRequest, "Couldn't parse tokes neither as json or form payload")
+		return c.String(http.StatusBadRequest, "Couldn't parse token neither as json or form payload")
 	}
 	if auth.Token != webookSecret {
 		return c.String(http.StatusUnauthorized, "Provided token doesn't match")
