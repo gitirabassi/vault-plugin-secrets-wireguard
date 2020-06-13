@@ -82,3 +82,4 @@ scripts/custom.sh
 
 # binary
 bin/vault-plugin-auth-wireguard
+tmp

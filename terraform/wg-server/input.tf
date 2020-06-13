@@ -43,6 +43,11 @@ variable "ssh_key_name" {
   description = "The AWS ssh key name to install in the instance"
 }
 
+variable instance_ami {
+  type = string
+  default = ""
+}
+
 data "aws_ami" "flatcar" {
   most_recent = true
   owners      = ["075585003325"]

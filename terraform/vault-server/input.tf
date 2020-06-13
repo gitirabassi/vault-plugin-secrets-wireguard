@@ -14,9 +14,14 @@ variable enable_ssh {
   default = true
 }
 
-variable "ssh_key_name" {
+variable ssh_key_name {
   type        = string
   description = "The AWS ssh key name to install in the instance"
+}
+
+variable instance_ami {
+  type = string
+  default = ""
 }
 
 data "aws_ami" "flatcar" {

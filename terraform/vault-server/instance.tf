@@ -8,7 +8,7 @@ resource "aws_eip" "main" {
 }
 
 resource "aws_instance" "main" {
-  ami                    = data.aws_ami.flatcar.id
+  ami                    = var.instance_ami != "" ? var.instance_ami : data.aws_ami.flatcar.id
   instance_type          = var.instance_type
   user_data              = data.ignition_config.main.rendered
   subnet_id              = aws_subnet.main.id
