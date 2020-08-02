@@ -1,5 +1,7 @@
 # Vault-secret-plugin-wireguard
 
+> NOTA BENE: this is still WIP, basic functionalities are still not fully implemented
+
 ## Paths
 
 - GET/POST/DELETE `/config`

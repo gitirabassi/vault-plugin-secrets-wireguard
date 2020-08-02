@@ -95,7 +95,7 @@ func main() {
 	}
 	// First we set all the interface values for the server
 	conf := &Config{}
-	conf.Server.PostUp = fmt.Sprintf("sysctl -w net.ipv4.ip_forward=1; iptables -A FORWARD -i %v -j ACCEPT; iptables -t nat -A POSTROUTING -o %v -j MASQUERADE", interfaceName, outputInterface)
+	conf.Server.PostUp = fmt.Sprintf("sysctl -w net.ipv4.ip_forward=1; iptables -A FORWARD -p tcp --dport 22 -i %v -j ACCEPT; iptables -A FORWARD -p tcp --dport 80 -i %v -j ACCEPT; iptables -A FORWARD -p tcp --dport 443 -i %v -j ACCEPT; iptables -t nat -A POSTROUTING -o %v -j MASQUERADE", interfaceName, outputInterface)
 	conf.Server.PostDown = fmt.Sprintf("iptables -D FORWARD -i %v -j ACCEPT; iptables -t nat -D POSTROUTING -o %v -j MASQUERADE", interfaceName, outputInterface)
 	serverIP, err := subnet.AllocateNext()
 	if err != nil {

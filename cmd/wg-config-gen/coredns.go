@@ -10,8 +10,12 @@ const corefile = `
 . {
     bind %v
     forward . 8.8.8.8 9.9.9.9
+    prometheus
+    debug
     log
     errors
+    ready
+    cache 120
 }
 `
 
